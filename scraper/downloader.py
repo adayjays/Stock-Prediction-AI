@@ -1,21 +1,43 @@
-import requests
-from bs4 import BeautifulSoup
+# Import necessary modules from Selenium
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+import time
 
-url = "https://www.nasdaq.com/market-activity/stocks/screener"
+try:
+    # Configure Firefox options for a headless (invisible) browser
+    fireFoxOptions = Options()
+    fireFoxOptions.add_argument("--headless")
 
-response = requests.get(url)
+    # Initialize a Firefox WebDriver with the specified options
+    browser = webdriver.Firefox(options=fireFoxOptions)
 
-soup = BeautifulSoup(response.content, "html.parser")
+    # Navigate to the NASDAQ Stock Screener webpage
+    browser.get('https://www.nasdaq.com/market-activity/stocks/screener')
 
-download_link = soup.find("a", class_=".ns-download-1")
+    # Find and select the "Download Data" button using a CSS selector
+    button = browser.find_element(By.CSS_SELECTOR, ".ns-download-1")
 
-if download_link:
-    csv_url = download_link["href"]
+    # Simulate a click action on the "Download Data" button
+    ActionChains(browser).click(button)
 
-    csv_response = requests.get(csv_url)
+    # Wait for 5 seconds (adjust as needed) to allow the download to start
+    time.sleep(5)
 
-    with open("nasdaq_data.csv", "wb") as csv_file:
-        csv_file.write(csv_response.content)
-    print("CSV file downloaded successfully.")
-else:
-    print("Download link not found.")
+    # Retrieve the name of the downloaded file from the "download" attribute of the button
+    fileName = button.get_attribute("download")
+
+    # Click the "Download Data" button again to confirm the download (if needed)
+    browser.find_element(By.CSS_SELECTOR, ".ns-download-1").click()
+
+    # Wait until the webpage's document state is "complete" before proceeding
+    WebDriverWait(browser, 60).until(lambda d: d.execute_script("return document.readyState") == "complete")
+
+finally:
+    try:
+        # Close the browser window, regardless of whether the script succeeded or failed
+        browser.close()
+    except:
+        pass

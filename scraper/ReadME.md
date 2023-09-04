@@ -1,42 +1,48 @@
+# Selenium Web Scraper for NASDAQ Stock Screener
 
-# NASDAQ Data Scraper
+This Python script uses the Selenium library to automate the process of downloading data from the NASDAQ Stock Screener website. It simulates a headless Firefox browser to access the webpage, click on the "Download Data" button, and download the data.
 
-This is a simple Python script to scrape data from the NASDAQ website using web scraping. It downloads a CSV file from the NASDAQ screener page.
+## Prerequisites
 
-## Getting Started
+Before running this script, ensure you have the following prerequisites:
 
-These instructions will help you set up and run the script on your local machine.
+1. **Python**: You need Python installed on your system. You can download Python from [python.org](https://www.python.org/downloads/).
 
-### Prerequisites
+2. **Selenium**: You must have the Selenium library installed. You can install it using pip:
 
-- Python 3.x
-- `requests` library
-- `beautifulsoup4` library
+   ```
+   pip install selenium
+   ```
 
-You can install the required libraries using the following commands:
+3. **Mozilla Firefox**: Make sure you have Mozilla Firefox installed on your system. You can download it from the official website: [Mozilla Firefox](https://www.mozilla.org/en-US/firefox/new/).
 
-###### bash
-pip install requests
-pip install beautifulsoup4
+4. **GeckoDriver**: You also need to download the GeckoDriver, which is the Firefox WebDriver. Make sure to download the appropriate version for your Firefox installation from the [GeckoDriver releases page](https://github.com/mozilla/geckodriver/releases) and place it in your system's PATH.
 
-### Running the Scraper
+## How to Use
 
-1. Clone this repository to your local machine or download the script directly.
+1. Clone or download this repository to your local machine.
+
 2. Open a terminal or command prompt and navigate to the directory containing the script.
+
 3. Run the script using the following command:
 
-##### bash
-   python scraper.py
+   ```
+   python downloader.py
+   ```
 
-   The script will scrape the NASDAQ website, find the download link, and save the CSV file locally as `nasdaq_data.csv`.
+   Replace `downloader.py` with the actual name of the script.
 
-### Legal Considerations
+4. The script will launch a headless Firefox browser, navigate to the NASDAQ Stock Screener webpage, and download the data by clicking the "Download Data" button.
 
-Please be aware that web scraping may be subject to legal and ethical considerations. Ensure that your scraping activities comply with the website's terms of use and policies. This script is provided for educational purposes only.
+5. The downloaded data will be saved to your default download directory.
 
-## License
+## Important Notes
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+- The script uses a headless browser (no graphical interface), which means it can run in the background without opening a visible browser window.
 
+- Ensure that your Mozilla Firefox version and GeckoDriver version are compatible. If you encounter any issues, consider updating both Firefox and GeckoDriver.
 
-Replace the sections as needed and add any additional information that you think would be relevant to users who will be using or contributing to your project.
+- The script uses the NASDAQ Stock Screener website URL mentioned in the code. You can modify the URL to target a different webpage if needed.
+
+- Depending on your internet speed and the NASDAQ website's responsiveness, you may need to adjust the waiting times (e.g., `time.sleep` and `WebDriverWait`) to ensure the page fully loads before attempting to download the data.
+
