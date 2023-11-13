@@ -1,48 +1,66 @@
-# Selenium Web Scraper for NASDAQ Stock Screener
+# Stock Price Predictor
 
-This Python script uses the Selenium library to automate the process of downloading data from the NASDAQ Stock Screener website. It simulates a headless Firefox browser to access the webpage, click on the "Download Data" button, and download the data.
+### data_cleaner.py
 
-## Prerequisites
+**Data Cleaner**
 
-Before running this script, ensure you have the following prerequisites:
+This script, `data_cleaner.py`, is designed to clean CSV files with specific headers: Date, Open, High, Low, Close, Volume, Adj Close. It utilizes the pandas library to handle data cleaning tasks such as handling missing values, converting data types, and ensuring the presence of expected headers.
 
-1. **Python**: You need Python installed on your system. You can download Python from [python.org](https://www.python.org/downloads/).
+#### Usage
 
-2. **Selenium**: You must have the Selenium library installed. You can install it using pip:
+1. **Run the Script**
 
-   ```
-   pip install selenium
-   ```
-
-3. **Mozilla Firefox**: Make sure you have Mozilla Firefox installed on your system. You can download it from the official website: [Mozilla Firefox](https://www.mozilla.org/en-US/firefox/new/).
-
-4. **GeckoDriver**: You also need to download the GeckoDriver, which is the Firefox WebDriver. Make sure to download the appropriate version for your Firefox installation from the [GeckoDriver releases page](https://github.com/mozilla/geckodriver/releases) and place it in your system's PATH.
-
-## How to Use
-
-1. Clone or download this repository to your local machine.
-
-2. Open a terminal or command prompt and navigate to the directory containing the script.
-
-3. Run the script using the following command:
-
-   ```
-   python downloader.py
+   ```bash
+   python data_cleaner.py
    ```
 
-   Replace `downloader.py` with the actual name of the script.
+2. **Enter File Name**
 
-4. The script will launch a headless Firefox browser, navigate to the NASDAQ Stock Screener webpage, and download the data by clicking the "Download Data" button.
+   - The script will prompt you to enter the name of the CSV file you want to clean.
 
-5. The downloaded data will be saved to your default download directory.
+3. **Check the Cleaned Data**
 
-## Important Notes
+   - The script will display information about the original and cleaned data.
+   - The cleaned data will be saved to a new CSV file with "_cleaned" appended to the original file name.
 
-- The script uses a headless browser (no graphical interface), which means it can run in the background without opening a visible browser window.
+#### Requirements
 
-- Ensure that your Mozilla Firefox version and GeckoDriver version are compatible. If you encounter any issues, consider updating both Firefox and GeckoDriver.
+Ensure you have the required libraries installed by running:
 
-- The script uses the NASDAQ Stock Screener website URL mentioned in the code. You can modify the URL to target a different webpage if needed.
+```bash
+pip install -r requirements.txt
+```
 
-- Depending on your internet speed and the NASDAQ website's responsiveness, you may need to adjust the waiting times (e.g., `time.sleep` and `WebDriverWait`) to ensure the page fully loads before attempting to download the data.
+### main.py
+
+**Stock Price Prediction with LSTM**
+
+This script, `main.py`, demonstrates stock price prediction using a Long Short Term Memory (LSTM) network. It follows a step-by-step process, including loading the dataset, normalizing data, creating data structures, building and training the LSTM model, and making predictions.
+
+#### Usage
+
+1. **Run the Script**
+
+   ```bash
+   python main.py
+   ```
+
+2. **Input File Name**
+
+   - The script will prompt you to input the name of the CSV file containing historical stock data.
+
+3. **Check Predictions**
+
+   - The script will display the actual and predicted stock prices, providing a visual representation of the model's performance.
+
+   ![Predicted Data](/output/Figure_1.png)
+
+
+#### Requirements
+
+Ensure you have the required libraries installed by running:
+
+```bash
+pip install -r requirements.txt
+```
 
