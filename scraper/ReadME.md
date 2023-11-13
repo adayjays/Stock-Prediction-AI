@@ -53,7 +53,7 @@ This script, `main.py`, demonstrates stock price prediction using a Long Short T
 
    - The script will display the actual and predicted stock prices, providing a visual representation of the model's performance.
 
-   ![Predicted Data](/output/Figure_1.png)
+   ![Predicted Data](/scraper/output/Figure_1.png)
 
 
 #### Requirements
