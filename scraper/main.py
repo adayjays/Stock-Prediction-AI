@@ -5,6 +5,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense
+from sklearn.metrics import mean_absolute_error
 
 class StockPricePredictor:
     def __init__(self, file_path):
@@ -68,6 +69,18 @@ class StockPricePredictor:
         plt.legend()
         plt.show()
 
+    def calculate_average_mae(self):
+        # For the training data
+        train_predictions = self.model.predict(self.X_train)
+        train_mae = mean_absolute_error(self.y_train, train_predictions)
+        print(f"Average MAE for training data: {train_mae}")
+
+        # For the testing data
+        test_predictions = self.model.predict(self.X_test)
+        test_mae = mean_absolute_error(self.actual_prices, test_predictions)
+        print(f"Average MAE for testing data: {test_mae}")
+
+
 def main():
     # Instantiate the StockPricePredictor
     predictor = StockPricePredictor("google_stock_data.csv") 
@@ -90,5 +103,10 @@ def main():
     # Plot the results
     predictor.plot_results()
 
+    #Calculate and display average MAE
+    predictor.calculate_average_mae()
+
 if __name__ == "__main__":
     main()
+
+# Mean Absolute Error (MAE) is the mae
